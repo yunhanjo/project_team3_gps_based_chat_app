@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "59589105522",
+    "project_id": "team3-project-chat-app",
+    "storage_bucket": "team3-project-chat-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:59589105522:android:b5b573be03f81bf729afeb",
+        "android_client_info": {
+          "package_name": "com.example.project_team3_gps_based_chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaQBxU9qJQMNHfDioRo1eM5QStYtlcMbE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
