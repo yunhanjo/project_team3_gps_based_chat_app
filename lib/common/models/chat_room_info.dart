@@ -3,6 +3,7 @@ class ChatRoomInfo {
   String name;
   String address;
   String chatNM;
+  String category;
   String descript;
   String hostkey;
   ChatRoomInfo({
@@ -10,26 +11,28 @@ class ChatRoomInfo {
     required this.name,
     required this.address,
     required this.chatNM,
+    required this.category,
     required this.descript,
     required this.hostkey,
   });
 
-  ChatRoomInfo.fromJson(Map<String, dynamic> map)
+  ChatRoomInfo.fromJson(Map<String, dynamic> map, String id)
     : this(
-        chatID: map['chatID'],
+        chatID: id,
         name: map['name'],
         address: map['address'],
         chatNM: map['chatNM'],
+        category: map['category'],
         descript: map['descript'],
         hostkey: map['hostkey'],
       );
 
   Map<String, dynamic> toJson() {
     return {
-      'chatID': chatID,
       'name': name,
       'address': address,
       'chatNM': chatNM,
+      'category': category,
       'descript': descript,
       'hostkey': hostkey,
     };
