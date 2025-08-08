@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_team3_gps_based_chat_app/common/color.dart';
 
 class myContent extends StatelessWidget {
   const myContent({super.key});
@@ -15,7 +16,7 @@ class myContent extends StatelessWidget {
           padding: EdgeInsets.all(6),
           height: 35,
           decoration: BoxDecoration(
-            color: Colors.grey,
+            color: AppColor.myContentBoxColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(12),
               topRight: Radius.circular(12),
