@@ -10,7 +10,7 @@ plugins {
 
 android {
     namespace = "com.example.project_team3_gps_based_chat_app"
-    compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = "27.0.12077973"
 
     compileOptions {
