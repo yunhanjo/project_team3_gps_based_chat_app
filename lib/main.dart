@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_team3_gps_based_chat_app/pages/welcome/welcome_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,7 +10,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp(home: WelcomePage());
   }
 }
-// 민우의 브랜치
