@@ -6,6 +6,8 @@ import 'package:project_team3_gps_based_chat_app/pages/chat/views/my_content.dar
 import 'package:project_team3_gps_based_chat_app/pages/chat/views/other_content.dart';
 
 class ChatPage extends ConsumerStatefulWidget {
+  String chatID;
+  ChatPage({required this.chatID});
   @override
   ConsumerState<ChatPage> createState() => _ChatPageState();
 }

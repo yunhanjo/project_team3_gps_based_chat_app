@@ -45,3 +45,10 @@ class ChatViewModel extends FamilyNotifier<ChatState, String> {
     });
   }
 }
+
+final chatViewModelProvider =
+    NotifierProvider.family<ChatViewModel, ChatState, String>(
+      () {
+        return ChatViewModel();
+      },
+    );
