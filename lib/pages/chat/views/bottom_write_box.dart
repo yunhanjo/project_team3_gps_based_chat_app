@@ -3,8 +3,10 @@ import 'package:project_team3_gps_based_chat_app/common/color.dart';
 
 class bottomWriteBox extends StatelessWidget {
   TextEditingController textEditingController;
+  final Function(String) sendMessage;
   bottomWriteBox({
     required this.textEditingController,
+    required this.sendMessage,
     super.key,
   });
 
@@ -52,17 +54,22 @@ class bottomWriteBox extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10),
-              Container(
-                width: 45,
-                height: 45,
-                alignment: Alignment(0.1, 0),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.grey[400],
-                ),
-                child: Image.asset(
-                  'assets/icons/send.png',
-                  fit: BoxFit.contain,
+              GestureDetector(
+                onTap: () {
+                  sendMessage(textEditingController.text);
+                },
+                child: Container(
+                  width: 45,
+                  height: 45,
+                  alignment: Alignment(0.1, 0),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey[400],
+                  ),
+                  child: Image.asset(
+                    'assets/icons/send.png',
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
             ],

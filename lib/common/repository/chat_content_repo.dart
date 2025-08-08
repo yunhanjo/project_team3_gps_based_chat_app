@@ -25,7 +25,7 @@ class ChatContentRepo {
         'sender': sender,
         'address': address,
         'message': message,
-        'createAt': DateTime.now(),
+        'createdAt': DateTime.now(),
       });
       return true;
     } catch (e) {
@@ -35,12 +35,10 @@ class ChatContentRepo {
   }
 
   // 선택된 채팅방에 대한 채팅내역 불러오기
-  Stream<List<ChatContent>> streamChatContents(
-    String chatRoomID,
-  ) {
+  Stream<List<ChatContent>> streamChatContents(String chatID) {
     try {
       final docRef = _conllectionRef
-          .where('chatID', isEqualTo: chatRoomID)
+          .where('chatID', isEqualTo: chatID)
           .snapshots();
       final result = docRef.map((event) {
         final list = event.docs.map((doc) {

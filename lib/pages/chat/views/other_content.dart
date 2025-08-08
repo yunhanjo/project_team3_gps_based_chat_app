@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
+import 'package:project_team3_gps_based_chat_app/common/models/chat_content.dart';
 
 class otherContent extends StatelessWidget {
-  const otherContent({super.key});
+  ChatContent content;
+  otherContent({required this.content, super.key});
 
   @override
   Widget build(BuildContext context) {
+    String time = DateFormat('HH:mm').format(content.createdAt);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.end,
       mainAxisAlignment: MainAxisAlignment.start,
@@ -27,12 +31,15 @@ class otherContent extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('김현수'),
+            Text(content.sender),
             Flexible(
               child: ConstrainedBox(
                 constraints: BoxConstraints(maxWidth: 200),
                 child: Container(
-                  padding: EdgeInsets.all(6),
+                  padding: EdgeInsets.symmetric(
+                    vertical: 6,
+                    horizontal: 8,
+                  ),
                   constraints: BoxConstraints(minHeight: 35),
                   decoration: BoxDecoration(
                     color: AppColor.greyBoxColor,
@@ -42,14 +49,20 @@ class otherContent extends StatelessWidget {
                       bottomRight: Radius.circular(12),
                     ),
                   ),
-                  child: Text('안녕하세요!', softWrap: true),
+                  child: Text(content.message, softWrap: true),
                 ),
               ),
             ),
           ],
         ),
         SizedBox(width: 5),
-        Text('11:12'),
+        Text(
+          time,
+          style: TextStyle(
+            fontSize: 12,
+            color: AppColor.greyTextColor,
+          ),
+        ),
         Spacer(),
       ],
     );

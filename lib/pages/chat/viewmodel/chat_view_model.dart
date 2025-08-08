@@ -36,10 +36,8 @@ class ChatViewModel extends FamilyNotifier<ChatState, String> {
   }
 
   // 실시간으로 메세지 불러오기
-  void streamMessage(String chatRoomID) {
-    final stream = chatContentRepo.streamChatContents(
-      chatRoomID,
-    );
+  void streamMessage(String chatID) {
+    final stream = chatContentRepo.streamChatContents(chatID);
     stream.listen((contents) {
       state = ChatState(contents);
     });
