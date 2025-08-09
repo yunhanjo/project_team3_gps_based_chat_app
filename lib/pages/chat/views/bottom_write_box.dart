@@ -57,6 +57,7 @@ class bottomWriteBox extends StatelessWidget {
               GestureDetector(
                 onTap: () {
                   sendMessage(textEditingController.text);
+                  textEditingController.clear();
                 },
                 child: Container(
                   width: 45,
