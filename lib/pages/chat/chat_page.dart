@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
+import 'package:project_team3_gps_based_chat_app/common/models/chat_content.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chat/viewmodel/chat_view_model.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chat/views/bottom_write_box.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chat/views/my_content.dart';
@@ -24,6 +25,7 @@ class ChatPage extends ConsumerStatefulWidget {
 class _ChatPageState extends ConsumerState<ChatPage> {
   TextEditingController textEditingController =
       TextEditingController();
+  ScrollController scrollController = ScrollController();
 
   void writeMessage(String message) {
     ref
@@ -42,6 +44,16 @@ class _ChatPageState extends ConsumerState<ChatPage> {
     final chatState = ref.watch(
       chatViewModelProvider(widget.chatID),
     );
+    ref.listen<ChatState>(chatViewModelProvider(widget.chatID), (
+      prev,
+      next,
+    ) {
+      if (next.contents.length != prev?.contents.length) {
+        scrollController.jumpTo(
+          scrollController.position.maxScrollExtent,
+        );
+      }
+    });
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -50,13 +62,20 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       ),
       body: Column(
         children: [
+          SizedBox(height: 15),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.all(15),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+              ),
               child: ListView.builder(
+                controller: scrollController,
                 itemCount: chatState.contents.length,
                 itemBuilder: (context, index) {
                   final content = chatState.contents[index];
+                  final prevContent = index != 0
+                      ? chatState.contents[index - 1]
+                      : null;
                   return Padding(
                     padding: const EdgeInsets.symmetric(
                       vertical: 5,
@@ -64,7 +83,10 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                     child: Column(
                       children: [
                         widget.name != content.sender
-                            ? otherContent(content: content)
+                            ? otherContent(
+                                content: content,
+                                prevContent: prevContent,
+                              )
                             : myContent(content: content),
                       ],
                     ),
