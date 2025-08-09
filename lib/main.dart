@@ -14,7 +14,7 @@ import 'package:project_team3_gps_based_chat_app/pages/chat/chat_page.dart';
 
 ChatRoomInfo aa = ChatRoomInfo(
   chatID: 'aa1234',
-  name: '윤한조',
+  name: '김현수',
   address: '상암동',
   chatNM: '초보 등산',
   category: '운동',

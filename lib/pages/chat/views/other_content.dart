@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
 import 'package:project_team3_gps_based_chat_app/common/models/chat_content.dart';
 
+/// 다른 사용자 채팅 박스
 class otherContent extends StatelessWidget {
   ChatContent content;
   ChatContent? prevContent;
@@ -21,15 +22,9 @@ class otherContent extends StatelessWidget {
         // 프로필
         Padding(
           padding: const EdgeInsets.only(top: 5, left: 5),
-          child: Container(
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: AppColor.greyBoxColor,
-              shape: BoxShape.circle,
-            ),
-            child: Image.asset('assets/icons/profile.png'),
-          ),
+          child: content.sender != prevContent?.sender
+              ? profil()
+              : SizedBox(width: 50),
         ),
         SizedBox(width: 12),
 
@@ -40,7 +35,9 @@ class otherContent extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // 이름
-              Text(content.sender),
+              content.sender != prevContent?.sender
+                  ? Text(content.sender)
+                  : SizedBox.shrink(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
@@ -90,23 +87,20 @@ class otherContent extends StatelessWidget {
   }
 }
 
-// 프로필
-class chatProfil extends StatelessWidget {
-  const chatProfil({super.key});
+/// 프로필
+class profil extends StatelessWidget {
+  const profil({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.topCenter,
-      child: Container(
-        width: 50,
-        height: 50,
-        decoration: BoxDecoration(
-          color: AppColor.greyBoxColor,
-          shape: BoxShape.circle,
-        ),
-        child: Image.asset('assets/icons/profile.png'),
+    return Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(
+        color: AppColor.greyBoxColor,
+        shape: BoxShape.circle,
       ),
+      child: Image.asset('assets/icons/profile.png'),
     );
   }
 }

@@ -18,7 +18,7 @@ class ChatViewModel extends FamilyNotifier<ChatState, String> {
 
   final chatContentRepo = ChatContentRepo();
 
-  // 내가 보낸 메세지 서버에 저장
+  /// 내가 보낸 메세지 서버에 저장
   Future<void> sendMessage({
     required String chatID,
     required String chatNM,
@@ -35,7 +35,7 @@ class ChatViewModel extends FamilyNotifier<ChatState, String> {
     );
   }
 
-  // 실시간으로 메세지 불러오기
+  /// 실시간으로 메세지 불러오기
   void streamMessage(String chatID) {
     final stream = chatContentRepo.streamChatContents(chatID);
     stream.listen((contents) {

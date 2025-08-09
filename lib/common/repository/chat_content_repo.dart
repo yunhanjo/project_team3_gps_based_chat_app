@@ -34,7 +34,7 @@ class ChatContentRepo {
     }
   }
 
-  // 선택된 채팅방에 대한 채팅내역 불러오기
+  // 선택된 채팅방에 대한 채팅내역 실시간으로 불러오기
   Stream<List<ChatContent>> streamChatContents(String chatID) {
     try {
       final docRef = _conllectionRef

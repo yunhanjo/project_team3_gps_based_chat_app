@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
 
+/// 채팅 입력 박스 위젯
 class bottomWriteBox extends StatelessWidget {
   TextEditingController textEditingController;
   final Function(String) sendMessage;
@@ -26,6 +27,7 @@ class bottomWriteBox extends StatelessWidget {
           padding: const EdgeInsets.all(15),
           child: Row(
             children: [
+              // 채팅 입력 박스
               Expanded(
                 child: Container(
                   constraints: BoxConstraints(minHeight: 45),
@@ -54,6 +56,7 @@ class bottomWriteBox extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 10),
+              // 채팅 보내기 버튼
               GestureDetector(
                 onTap: () {
                   sendMessage(textEditingController.text);

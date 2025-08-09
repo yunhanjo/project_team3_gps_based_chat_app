@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
 import 'package:project_team3_gps_based_chat_app/common/models/chat_content.dart';
 
+/// 내 채팅 박스
 class myContent extends StatelessWidget {
   ChatContent content;
   myContent({required this.content});
@@ -15,6 +16,7 @@ class myContent extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         Spacer(),
+        // 시간
         Text(
           time,
           style: TextStyle(
@@ -23,6 +25,7 @@ class myContent extends StatelessWidget {
           ),
         ),
         SizedBox(width: 5),
+        // 말풍선
         Container(
           padding: EdgeInsets.symmetric(
             vertical: 6,
