@@ -1,11 +1,13 @@
-import 'package:device_info_plus/device_info_plus.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
 import 'package:project_team3_gps_based_chat_app/common/repository/vworld_repository.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chatList/chat_list_page.dart';
 import 'package:project_team3_gps_based_chat_app/pages/welcome/geolocator_helper.dart';
+import 'package:project_team3_gps_based_chat_app/pages/welcome/uuid_create.dart';
 import 'package:project_team3_gps_based_chat_app/pages/welcome/viewmodel/welcome_view_model.dart';
+import 'package:uuid/uuid.dart';
 
 String? address;
 
@@ -15,7 +17,7 @@ class WelcomePage extends ConsumerWidget {
   final _formKey = GlobalKey<FormState>(); // 텍스트폼필드에 사용함
   final TextEditingController controller = TextEditingController(); // 텍스트필드
   final VworldRepository vworld = VworldRepository(); // vworld API
-  final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin(); // 디바이스 키
+  var uuid = Uuid(); // uuid~
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -135,20 +137,18 @@ class WelcomePage extends ConsumerWidget {
                       onPressed: () async {
                         // 버튼 누를 때 검증 실행
                         if (_formKey.currentState!.validate()) {
-                          DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+                          final id =
+                              await LocalIdService.getOrCreateLocalUuid();
 
                           final position = await GeolocatorHelper.getPosition();
                           if (position != null) {
-                            AndroidDeviceInfo androidInfo =
-                                await deviceInfo.androidInfo;
-                            print('Running on ${androidInfo.serialNumber}');
                             final locals = await vworld.findByLatLng(
                               position.latitude,
                               position.longitude,
                             );
                             address = locals[0];
                             user.insertUser(
-                              userID: androidInfo.id,
+                              userID: id,
                               address: address!,
                               userNM: controller.text,
                               mapX: position.latitude.toString(),
