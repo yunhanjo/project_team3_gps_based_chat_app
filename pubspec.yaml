@@ -42,8 +42,10 @@ dependencies:
   dio: ^5.9.0
   geolocator: ^14.0.2
   image_picker: ^1.0.4
-  device_info_plus: ^11.5.0
   intl: ^0.20.2
+  uuid: ^4.4.2
+  shared_preferences: ^2.5.3
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
