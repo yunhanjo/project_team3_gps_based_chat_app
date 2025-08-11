@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '/common/models/chat_room_info.dart';
@@ -302,4 +303,5 @@ class _ChatListPageState extends State<ChatListPage> {
   // ); 
 
   }
+
 }

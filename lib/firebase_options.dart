@@ -65,4 +65,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'team3-project-chat-app.firebasestorage.app',
     iosBundleId: 'com.example.projectTeam3GpsBasedChatApp',
   );
+
 }
