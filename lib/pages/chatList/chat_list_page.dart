@@ -337,6 +337,7 @@ class _ChatListPageState extends State<ChatListPage> {
           address: widget.address,
           name: widget.name,
           chatID: widget.userID,
+          hostkey: widget.userID,
         ),
       ),
     );
