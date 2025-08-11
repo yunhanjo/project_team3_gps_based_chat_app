@@ -3,7 +3,24 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_team3_gps_based_chat_app/firebase_options.dart';
-import 'package:project_team3_gps_based_chat_app/pages/chatAdd/chat_add_page.dart';
+import 'package:project_team3_gps_based_chat_app/pages/welcome/welcome_page.dart';
+
+// String chatID;
+// String chatNM;
+// String sender;
+// String address;
+// String message;
+// DateTime createdAt;
+
+ChatRoomInfo aa = ChatRoomInfo(
+  chatID: 'aa1234',
+  name: '조민우',
+  address: '상암동',
+  chatNM: '초보 등산',
+  category: '운동',
+  descript: '등산할 사람~',
+  hostkey: 'aaa',
+);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +36,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ChatAddPage(),
+      home: WelcomePage(),
       theme: ThemeData(
         textTheme: GoogleFonts.playpenSansTextTheme(),
       ),
