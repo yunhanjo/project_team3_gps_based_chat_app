@@ -1,7 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_team3_gps_based_chat_app/common/models/chat_room_info.dart';
+import 'package:project_team3_gps_based_chat_app/pages/chat/chat_page.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chatList/chat_list_page.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chatAdd/viewmodel/chat_add_view_model.dart';
+
+ChatRoomInfo aa = ChatRoomInfo(
+  chatID: 'aa1234',
+  name: '조민우',
+  address: '상암동',
+  chatNM: '초보 등산',
+  category: '운동',
+  descript: '등산할 사람~',
+  hostkey: 'aaa',
+);
 
 class ChatAddPage extends StatefulWidget {
   @override
@@ -36,11 +48,24 @@ class _ChatAddPageState extends State<ChatAddPage> {
     try {
       await viewModel.saveChatData('삼성동'); // 저장
       final data = viewModel.getChatData('삼성동');
-      Navigator.pop(context, data); // 저장 후 pop으로 데이터 전달
-    } catch (e) {
-      ScaffoldMessenger.of(
+      // Navigator.pop(context, data);
+      Navigator.push(
         context,
-      ).showSnackBar(SnackBar(content: Text('저장 중 오류가 발생했습니다. 다시 시도해주세요.')));
+        MaterialPageRoute(
+          builder: (context) {
+            return ChatPage(
+              chatID: aa.chatID,
+              name: aa.name,
+              chatNM: aa.chatNM,
+              address: aa.address,
+            );
+          },
+        ),
+      ); // 저장 후 pop으로 데이터 전달
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('저장 중 오류가 발생했습니다. 다시 시도해주세요.')),
+      );
     }
   }
 
@@ -118,7 +143,10 @@ class _ChatAddPageState extends State<ChatAddPage> {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 50,
+                    vertical: 20,
+                  ),
                   child: TextField(
                     controller: viewModel.chatNMController,
                     decoration: InputDecoration(
@@ -129,7 +157,10 @@ class _ChatAddPageState extends State<ChatAddPage> {
                 ),
 
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 50,
+                    vertical: 20,
+                  ),
                   child: TextField(
                     controller: viewModel.descriptController,
                     decoration: InputDecoration(
@@ -145,10 +176,14 @@ class _ChatAddPageState extends State<ChatAddPage> {
                   child: ElevatedButton(
                     onPressed: _goToListPage,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFFFFEB86), // 버튼 배경색
+                      backgroundColor: Color(
+                        0xFFFFEB86,
+                      ), // 버튼 배경색
                       foregroundColor: Colors.black, // 텍스트 색
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10), // 모서리 둥글게
+                        borderRadius: BorderRadius.circular(
+                          10,
+                        ), // 모서리 둥글게
                       ),
                       elevation: 3, // 그림자 깊이
                       textStyle: TextStyle(
@@ -161,15 +196,21 @@ class _ChatAddPageState extends State<ChatAddPage> {
                         children: [
                           TextSpan(
                             text: '⚡',
-                            style: GoogleFonts.jetBrainsMono(fontSize: 20),
+                            style: GoogleFonts.jetBrainsMono(
+                              fontSize: 20,
+                            ),
                           ),
                           TextSpan(
                             text: ' Spark',
-                            style: GoogleFonts.playpenSans(fontSize: 20),
+                            style: GoogleFonts.playpenSans(
+                              fontSize: 20,
+                            ),
                           ),
                           TextSpan(
                             text: '!',
-                            style: GoogleFonts.jetBrainsMono(fontSize: 20),
+                            style: GoogleFonts.jetBrainsMono(
+                              fontSize: 20,
+                            ),
                           ),
                         ],
                       ),
