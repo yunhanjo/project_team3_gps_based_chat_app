@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_team3_gps_based_chat_app/common/repository/user_repo.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chatList/chat_list_page.dart';
-import 'package:project_team3_gps_based_chat_app/pages/welcome/uuid_create.dart';
+import 'package:project_team3_gps_based_chat_app/common/models/uuid_create.dart';
 import 'package:project_team3_gps_based_chat_app/pages/welcome/welcome_page.dart';
 
 class SplashPage extends StatefulWidget {

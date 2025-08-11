@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
 import 'package:project_team3_gps_based_chat_app/common/repository/vworld_repository.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chatList/chat_list_page.dart';
-import 'package:project_team3_gps_based_chat_app/pages/welcome/geolocator_helper.dart';
+import 'package:project_team3_gps_based_chat_app/common/models/geolocator_helper.dart';
 import 'package:project_team3_gps_based_chat_app/pages/welcome/viewmodel/welcome_view_model.dart';
 import 'package:uuid/uuid.dart';
 
