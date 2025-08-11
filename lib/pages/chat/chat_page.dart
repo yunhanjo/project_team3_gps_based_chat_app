@@ -70,6 +70,11 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       // 앱바 : 채팅방 이름
       appBar: AppBar(
         backgroundColor: AppColor.yellowBoxColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.only(
+            bottomRight: Radius.circular(80),
+          ),
+        ),
         title: Text(widget.chatNM),
       ),
       body: Column(
