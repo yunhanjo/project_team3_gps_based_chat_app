@@ -1,41 +1,14 @@
 import 'package:flutter/material.dart';
 
 class AppColor {
-  static const Color primaryColor = Color.fromRGBO(
-    255,
-    234,
-    143,
-    100,
-  );
-  static const Color textColor = Color.fromRGBO(
-    195,
-    195,
-    195,
-    100,
-  );
-  static const Color appBarText = Colors.black;
-  static const Color chatListText = Color.fromRGBO(
-    162,
-    107,
-    107,
-    100,
-  );
-  static const Color welcomPhoto = Color.fromRGBO(
-    255,
-    240,
-    146,
-    90,
-  );
-  static const Color cateTextbox = Color.fromRGBO(
-    179,
-    179,
-    179,
-    100,
-  );
-  static const Color chatDtailText = Color.fromRGBO(
-    105,
-    148,
-    213,
-    100,
-  );
+  static const Color blackTextColor = Colors.black;
+  static const Color greyTextColor = Color.fromRGBO(151, 151, 151, 1);
+  static const Color hintTextColor = Color.fromRGBO(195, 195, 195, 1);
+  static const Color yellowBoxColor = Color.fromRGBO(255, 235, 134, 1);
+  static const Color greyBoxColor = Color.fromRGBO(232, 232, 232, 1);
+  static const Color blackOutline = Colors.black;
+  static const Color greyOutline = greyBoxColor;
+  static const Color myContentBoxColor = Color.fromRGBO(255, 246, 207, 1);
+  static const Color myProfilColor = Color.fromRGBO(255, 240, 146, 1);
+  static const Color yellowOutlineColor = myProfilColor;
 }
