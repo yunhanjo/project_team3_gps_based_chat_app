@@ -33,7 +33,7 @@ class ChatContent {
       'sender': sender,
       'address': address,
       'message': message,
-      'createAt': createdAt,
+      'createdAt': createdAt,
     };
   }
 }
