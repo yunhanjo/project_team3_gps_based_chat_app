@@ -7,9 +7,7 @@ import 'package:project_team3_gps_based_chat_app/pages/splash/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(ProviderScope(child: const MyApp()));
 }
 
@@ -20,9 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: SplashPage(),
-      theme: ThemeData(
-        textTheme: GoogleFonts.playpenSansTextTheme(),
-      ),
+      theme: ThemeData(textTheme: GoogleFonts.playpenSansTextTheme()),
     );
   }
 }

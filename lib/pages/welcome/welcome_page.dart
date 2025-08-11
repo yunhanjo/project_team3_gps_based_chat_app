@@ -1,18 +1,16 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
 import 'package:project_team3_gps_based_chat_app/common/repository/vworld_repository.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chatList/chat_list_page.dart';
 import 'package:project_team3_gps_based_chat_app/pages/welcome/geolocator_helper.dart';
-import 'package:project_team3_gps_based_chat_app/pages/welcome/uuid_create.dart';
 import 'package:project_team3_gps_based_chat_app/pages/welcome/viewmodel/welcome_view_model.dart';
 import 'package:uuid/uuid.dart';
 
-String? address;
-
 class WelcomePage extends ConsumerWidget {
-  WelcomePage({super.key});
+  String id;
+
+  WelcomePage({super.key, required this.id});
 
   final _formKey = GlobalKey<FormState>(); // 텍스트폼필드에 사용함
   final TextEditingController controller = TextEditingController(); // 텍스트필드
@@ -137,19 +135,16 @@ class WelcomePage extends ConsumerWidget {
                       onPressed: () async {
                         // 버튼 누를 때 검증 실행
                         if (_formKey.currentState!.validate()) {
-                          final id =
-                              await LocalIdService.getOrCreateLocalUuid();
-
                           final position = await GeolocatorHelper.getPosition();
                           if (position != null) {
                             final locals = await vworld.findByLatLng(
                               position.latitude,
                               position.longitude,
                             );
-                            address = locals[0];
+                            final address = locals[0];
                             user.insertUser(
                               userID: id,
-                              address: address!,
+                              address: address,
                               userNM: controller.text,
                               mapX: position.latitude.toString(),
                               mapY: position.longitude.toString(),
