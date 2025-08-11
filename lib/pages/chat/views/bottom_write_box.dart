@@ -15,7 +15,7 @@ class bottomWriteBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      constraints: BoxConstraints(minHeight: 100),
+      constraints: BoxConstraints(minHeight: 78),
       decoration: BoxDecoration(
         color: AppColor.yellowBoxColor,
         borderRadius: BorderRadius.vertical(

@@ -53,10 +53,17 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       next,
     ) {
       if (next.contents.length != prev?.contents.length) {
-        scrollController.jumpTo(
-          scrollController.position.maxScrollExtent,
-        );
+        WidgetsBinding.instance.addPostFrameCallback((
+          timeStamp,
+        ) {
+          scrollController.jumpTo(
+            scrollController.position.maxScrollExtent,
+          );
+          print('object');
+          print(scrollController.position);
+        });
       }
+      print('asdf');
     });
     return Scaffold(
       backgroundColor: Colors.white,
@@ -68,37 +75,34 @@ class _ChatPageState extends ConsumerState<ChatPage> {
       body: Column(
         children: [
           Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 15,
+            child: ListView.builder(
+              padding: EdgeInsets.only(
+                left: 15,
+                right: 15,
+                bottom: 10,
               ),
-              // 채팅 내역
-              child: ListView.builder(
-                controller: scrollController,
-                itemCount: chatState.contents.length,
-                itemBuilder: (context, index) {
-                  final content = chatState.contents[index];
-                  final prevContent = index != 0
-                      ? chatState.contents[index - 1]
-                      : null;
-                  return Column(
-                    children: [
-                      index == 0
-                          ? SizedBox(height: 5)
-                          : SizedBox.shrink(),
-                      content.sender != prevContent?.sender
-                          ? SizedBox(height: 15)
-                          : SizedBox(height: 10),
-                      widget.name != content.sender
-                          ? otherContent(
-                              content: content,
-                              prevContent: prevContent,
-                            )
-                          : myContent(content: content),
-                    ],
-                  );
-                },
-              ),
+              controller: scrollController,
+              itemCount: chatState.contents.length,
+              itemBuilder: (context, index) {
+                final content = chatState.contents[index];
+                final prevContent = index != 0
+                    ? chatState.contents[index - 1]
+                    : null;
+                return Column(
+                  children: [
+                    content.sender != prevContent?.sender &&
+                            index != 0
+                        ? SizedBox(height: 15)
+                        : SizedBox(height: 10),
+                    widget.name != content.sender
+                        ? otherContent(
+                            content: content,
+                            prevContent: prevContent,
+                          )
+                        : myContent(content: content),
+                  ],
+                );
+              },
             ),
           ),
           // 채팅 입력 박스
