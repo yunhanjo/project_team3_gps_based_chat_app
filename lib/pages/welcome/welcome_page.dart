@@ -13,8 +13,10 @@ class WelcomePage extends ConsumerWidget {
   WelcomePage({super.key, required this.id});
 
   final _formKey = GlobalKey<FormState>(); // 텍스트폼필드에 사용함
-  final TextEditingController controller = TextEditingController(); // 텍스트필드
-  final VworldRepository vworld = VworldRepository(); // vworld API
+  final TextEditingController controller =
+      TextEditingController(); // 텍스트필드
+  final VworldRepository vworld =
+      VworldRepository(); // vworld API
   var uuid = Uuid(); // uuid~
 
   @override
@@ -26,7 +28,10 @@ class WelcomePage extends ConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 35),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 35,
+              vertical: 35,
+            ),
             child: Form(
               key: _formKey,
               child: Column(
@@ -36,7 +41,10 @@ class WelcomePage extends ConsumerWidget {
                     children: const [
                       Text(
                         'SparkTalk',
-                        style: TextStyle(fontSize: 32, letterSpacing: 2),
+                        style: TextStyle(
+                          fontSize: 32,
+                          letterSpacing: 2,
+                        ),
                       ),
                       SizedBox(width: 6),
                       Text('⚡', style: TextStyle(fontSize: 24)),
@@ -77,7 +85,9 @@ class WelcomePage extends ConsumerWidget {
                     textInputAction: TextInputAction.done,
                     decoration: InputDecoration(
                       hintText: '사용할 이름을 입력해 주세요',
-                      hintStyle: TextStyle(color: AppColor.hintTextColor),
+                      hintStyle: TextStyle(
+                        color: AppColor.hintTextColor,
+                      ),
                       filled: true,
                       fillColor: Colors.white,
                       contentPadding: const EdgeInsets.symmetric(
@@ -109,7 +119,9 @@ class WelcomePage extends ConsumerWidget {
                       if (input.length < 2) {
                         return '이름은 두 글자 이상이어야 합니다.';
                       }
-                      final validPattern = RegExp(r'^[가-힣a-zA-Z0-9]+$');
+                      final validPattern = RegExp(
+                        r'^[가-힣a-zA-Z0-9]+$',
+                      );
                       if (!validPattern.hasMatch(input)) {
                         return '특수문자는 사용할 수 없습니다.';
                       }
@@ -128,32 +140,43 @@ class WelcomePage extends ConsumerWidget {
                         elevation: 6,
                         backgroundColor: AppColor.yellowBoxColor,
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(
+                            10,
+                          ),
                         ),
-                        shadowColor: Colors.black.withOpacity(0.50),
+                        shadowColor: Colors.black.withOpacity(
+                          0.50,
+                        ),
                       ),
                       onPressed: () async {
                         // 버튼 누를 때 검증 실행
                         if (_formKey.currentState!.validate()) {
-                          final position = await GeolocatorHelper.getPosition();
+                          final position =
+                              await GeolocatorHelper.getPosition();
                           if (position != null) {
-                            final locals = await vworld.findByLatLng(
-                              position.latitude,
-                              position.longitude,
-                            );
+                            final locals = await vworld
+                                .findByLatLng(
+                                  position.latitude,
+                                  position.longitude,
+                                );
                             final address = locals[0];
                             user.insertUser(
                               userID: id,
                               address: address,
                               userNM: controller.text,
                               mapX: position.latitude.toString(),
-                              mapY: position.longitude.toString(),
+                              mapY: position.longitude
+                                  .toString(),
                             );
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return ChatListPage(data: {});
+                                  return ChatListPage(
+                                    address: address,
+                                    name: controller.text,
+                                    userID: id,
+                                  );
                                 },
                               ),
                             );

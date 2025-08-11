@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project_team3_gps_based_chat_app/common/models/chat_room_info.dart';
-import 'package:project_team3_gps_based_chat_app/pages/chat/chat_page.dart';
-import 'package:project_team3_gps_based_chat_app/pages/chatList/chat_list_page.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chatAdd/viewmodel/chat_add_view_model.dart';
 
-ChatRoomInfo aa = ChatRoomInfo(
-  chatID: 'aa1234',
-  name: '조민우',
-  address: '상암동',
-  chatNM: '초보 등산',
-  category: '운동',
-  descript: '등산할 사람~',
-  hostkey: 'aaa',
-);
-
 class ChatAddPage extends StatefulWidget {
+  String address;
+  String chatID;
+  String name;
+  ChatAddPage({
+    required this.address,
+    required this.chatID,
+    required this.name,
+  });
   @override
   _ChatAddPageState createState() => _ChatAddPageState();
 }
@@ -46,22 +41,10 @@ class _ChatAddPageState extends State<ChatAddPage> {
     }
 
     try {
-      await viewModel.saveChatData('삼성동'); // 저장
-      final data = viewModel.getChatData('삼성동');
-      // Navigator.pop(context, data);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return ChatPage(
-              chatID: aa.chatID,
-              name: aa.name,
-              chatNM: aa.chatNM,
-              address: aa.address,
-            );
-          },
-        ),
-      ); // 저장 후 pop으로 데이터 전달
+      await viewModel.saveChatData(widget.address); // 저장
+      final data = viewModel.getChatData(widget.address);
+      Navigator.pop(context, data);
+      // 저장 후 pop으로 데이터 전달
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('저장 중 오류가 발생했습니다. 다시 시도해주세요.')),
@@ -108,11 +91,11 @@ class _ChatAddPageState extends State<ChatAddPage> {
                     child: Text.rich(
                       //부분 텍스트 스타일 적용
                       TextSpan(
-                        text: '현재 000님의 위치\n',
+                        text: '현재 ${widget.name}님의 위치\n',
                         style: TextStyle(fontSize: 16), // 기본 스타일
                         children: [
                           TextSpan(
-                            text: '⚡삼성동⚡',
+                            text: '⚡${widget.address}⚡',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
