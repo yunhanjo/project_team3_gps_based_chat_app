@@ -1,3 +1,4 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
 import 'package:project_team3_gps_based_chat_app/common/repository/vworld_repository.dart';
@@ -8,9 +9,10 @@ String? address;
 class WelcomePage extends StatelessWidget {
   WelcomePage({super.key});
 
-  final _formKey = GlobalKey<FormState>();
-  final TextEditingController controller = TextEditingController();
-  final VworldRepository vworld = VworldRepository();
+  final _formKey = GlobalKey<FormState>(); // 텍스트폼필드에 사용할
+  final TextEditingController controller = TextEditingController(); // 텍스트필드
+  final VworldRepository vworld = VworldRepository(); // vworld API
+  final DeviceInfoPlugin deviceInfo = DeviceInfoPlugin(); // 디바이스 키
 
   @override
   Widget build(BuildContext context) {

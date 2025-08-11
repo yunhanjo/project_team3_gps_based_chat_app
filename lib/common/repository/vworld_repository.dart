@@ -25,6 +25,7 @@ class VworldRepository {
         final iterable = featuresList.map(
           (e) => '${e['properties']['emd_kor_nm']}',
         );
+        print(iterable);
         return iterable.toList();
       }
       return [];
