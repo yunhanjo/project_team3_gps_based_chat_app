@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:project_team3_gps_based_chat_app/common/models/chat_content.dart';
 
@@ -8,7 +10,7 @@ class ChatContentRepo {
   );
 
   // 채팅내역 데이터 저장하기
-  Future<bool> createUser({
+  Future<bool> createContent({
     required String chatID,
     required String chatNM,
     required String sender,
@@ -23,7 +25,7 @@ class ChatContentRepo {
         'sender': sender,
         'address': address,
         'message': message,
-        'createAt': DateTime.now(),
+        'createdAt': DateTime.now(),
       });
       return true;
     } catch (e) {
@@ -32,22 +34,23 @@ class ChatContentRepo {
     }
   }
 
-  // 선택된 채팅방에 대한 채팅내역 불러오기
-  Future<List<ChatContent>> readChatContents(
-    String chatRoomID,
-  ) async {
+  // 선택된 채팅방에 대한 채팅내역 실시간으로 불러오기
+  Stream<List<ChatContent>> streamChatContents(String chatID) {
     try {
-      final docRef = await _conllectionRef
-          .where('chatID', isEqualTo: chatRoomID)
-          .get();
-      final result = docRef.docs.map((doc) {
-        return ChatContent.fromJson(doc.data());
-      }).toList();
-      result.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      final docRef = _conllectionRef
+          .where('chatID', isEqualTo: chatID)
+          .snapshots();
+      final result = docRef.map((event) {
+        final list = event.docs.map((doc) {
+          return ChatContent.fromJson(doc.data());
+        }).toList();
+        list.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+        return list;
+      });
       return result;
     } catch (e) {
       print(e);
-      return [];
+      return Stream.empty();
     }
   }
 }
