@@ -1,11 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_team3_gps_based_chat_app/common/models/chat_room_info.dart';
 import 'package:project_team3_gps_based_chat_app/firebase_options.dart';
-import 'package:project_team3_gps_based_chat_app/pages/chat/chat_page.dart';
+import 'package:project_team3_gps_based_chat_app/pages/welcome/welcome_page.dart';
 
 // String chatID;
 // String chatNM;
@@ -36,12 +35,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: ChatPage(
-        chatID: aa.chatID,
-        name: aa.name,
-        chatNM: aa.chatNM,
-        address: aa.address,
-      ),
+      home: WelcomePage(),
       theme: ThemeData(textTheme: GoogleFonts.playpenSansTextTheme()),
     );
   }
