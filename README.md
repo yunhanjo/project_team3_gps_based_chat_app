@@ -1,7 +1,13 @@
 <h1 align="center"> ⚡ SparkTalk - Local Community Chat App 💬 </h1> 
 
 <div align="center">
-  
+  <img width="200" height="450" alt="splash" src="https://github.com/user-attachments/assets/d2c638dd-e4f0-419b-847a-0543b259cb9b" />
+  <img width="200" height="450" alt="welcome1" src="https://github.com/user-attachments/assets/048d54ba-fce3-4286-872e-73730d16b7d9" />
+  <img width="200" height="450" alt="welcome2" src="https://github.com/user-attachments/assets/78a67e6e-8e6e-4257-9d97-4687aac0f8a0" />
+  <img width="200" height="450" alt="chatlist1" src="https://github.com/user-attachments/assets/1d20809c-ca1a-4be0-803b-7404bea10943" />
+  <img width="200" height="450" alt="chatlist2" src="https://github.com/user-attachments/assets/c967c605-93b3-4d94-900a-1750a612e59c" />
+  <img width="200" height="450" alt="chat" src="https://github.com/user-attachments/assets/999be9b0-ae83-483b-9fac-528858a4d634" />
+  <img width="200" height="450" alt="chatadd" src="https://github.com/user-attachments/assets/edb1764c-4dea-4019-8ee0-890117810855" />
 </div>
 <br>
 
@@ -14,34 +20,28 @@
 
 
 
-## 팀원 소개 및 담당 역할
-| 이름   | 역할                                              | GitHub / Contact   |
+## 🚀 Our Crew
+| 이름   | 역할                                              | 담당 페이지   |
 |--------|---------------------------------------------------|--------------------|
-| 조민우 | 팀장, 상품 목록 페이지 구성, 발표                 | @wackyturtle       |
-| 유수현 | 상품 상세 페이지 구성, 발표 자료 제작             | @su-vely           |
-| 윤한조 | 상품 등록 페이지 구성, ReadMe                     | @yunhanjo          |
-| 동세진 | 장바구니 페이지 구성, 시연 영상 제작              | @HaeAhn00          |
-| 공통 | SA 작성, 담당 UI 디자인, 스크럼 일지 정리, QnA 정리 등 |                    |
+| 김현수 | 팀장, 발표, Firebase                  | ChatPage       |
+| 임초희 | 발표 자료 제작, Firebase             | ChatListPage           |
+| 조민우 | 테스트 및 버그 수정, 시연 영상 제작, vworld API, 디바이스 좌표 생성                     | WelcomPage          |
+| 윤한조 | ReadMe 및 SA 작성, QnA & 피드백 정리           | ChatAddPage          |
+| 공통 | SA 작성, 담당 UI 디자인, 스크럼 일지 정리 |                    |
 <br>
 
 ## 📂 프로젝트 바로가기 링크  
 👊 Notion :  
-https://www.notion.so/teamsparta/3-2292dc3ef51481f78278d05644de5569
+[https://www.notion.so/teamsparta/3-2292dc3ef51481f78278d05644de5569](https://www.notion.so/teamsparta/23a2dc3ef514811b8979de9fcadb0019)
 
 👊 Figma :  
-https://www.figma.com/design/cHLJc3lDYGpLKZ0A4eqj3Y/%EC%A3%BC%ED%8A%B9%EA%B8%B0-%EA%B8%B0%EC%B4%88_3%EC%A1%B0?node-id=0-1
+[https://www.figma.com/design/cHLJc3lDYGpLKZ0A4eqj3Y/%EC%A3%BC%ED%8A%B9%EA%B8%B0-%EA%B8%B0%EC%B4%88_3%EC%A1%B0?node-id=0-1](https://www.figma.com/design/9nId9948y9pN9VVlCxoiKV/Flutter-%EC%88%99%EB%A0%A8-3%EC%A1%B0?node-id=0-1&p=f&t=kWcywHbjgo9txEfj-0)
 
 👊 GitHub :  
-https://github.com/wackyturtle/flutter_pxmarket_app  
+[https://github.com/wackyturtle/flutter_pxmarket_app](https://github.com/hyun471/project_team3_gps_based_chat_app)  
 
 👊 YouTube :  
-https://www.youtube.com/watch?v=h_aDIZ1Qcy4  
-<br>
-
-## 🎯 주요 목표
-- 💡 팀 프로젝트 필수 기능을 안정적으로 구현하는 데 집중  
-- 🧱 과도한 확장보다는 핵심 기능을 제대로 작동시키는 것에 주력  
-- 📦 프로젝트 전체 흐름이 끝까지 이어지는 완성형 구조를 목표로 설정  
+[https://www.youtube.com/watch?v=h_aDIZ1Qcy4](https://www.youtube.com/watch?v=aaIQROUmzg4)  
 <br>
 
 ## 🔍 프로젝트 개요
@@ -51,10 +51,12 @@ https://www.youtube.com/watch?v=h_aDIZ1Qcy4
 - 번거로운 가입 없이, `즉흥적이고 자연스러운 소통`을 추구하는 사람들을 위한 어플
 <br>
 
-## 프로젝트 구조
+## 🎯 프로젝트 구조
+<br>
 <div>
   <img width="745" height="292" alt="Screenshot 2025-08-12 at 8 49 16 PM" src="https://github.com/user-attachments/assets/9cf6b84e-2170-4452-ba79-3b78ec49ccb6" />
 </div>
+<br>
 <pre>
   📁 lib/
 ├── main.dart
@@ -94,46 +96,28 @@ https://www.youtube.com/watch?v=h_aDIZ1Qcy4
 		    └── splash_page.dart
 </pre><br>
 
+## 📱 App Screens & Features
+| 화면                | 설명                 | 핵심 요소                  | 미리보기                                                                                                                                                                                                                                                                                                                  																																																																																						  |
+| --------------------- | ------------------------------ | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Splash Page**    | 앱 실행 시 로고 노출                   | 로고                                  | <img width="200" height="400" alt="splash" src="https://github.com/user-attachments/assets/d2c638dd-e4f0-419b-847a-0543b259cb9b" />                                                                                                                                                                                     |
+| **Welcome Page**   | 로그인 없이 익명 닉네임 입력,<br>GPS 사용 여부 체크 | 닉네임 입력창,<br>저장 버튼,<br>GPS로 지역(동)명 불러오기 | <div><img width="200" height="400" alt="welcome1" src="https://github.com/user-attachments/assets/048d54ba-fce3-4286-872e-73730d16b7d9" /><img width="200" height="400" alt="welcome2" src="https://github.com/user-attachments/assets/78a67e6e-8e6e-4257-9d97-4687aac0f8a0" /></div>   |
+| **Chat List Page** | 위치 기반 채팅방 목록 표시           | 동 이름,<br>채팅방 카드,<br>필터 버튼                 | <div><img width="200" height="400" alt="chatlist1" src="https://github.com/user-attachments/assets/1d20809c-ca1a-4be0-803b-7404bea10943" /><img width="200" height="400" alt="chatlist2" src="https://github.com/user-attachments/assets/c967c605-93b3-4d94-900a-1750a612e59c" /></div> |
+| **Chat Page**      | 실시간 채팅 UI                      | 메시지 목록,<br>입력창,<br>전송 버튼                  | <img width="200" height="400" alt="chat" src="https://github.com/user-attachments/assets/999be9b0-ae83-483b-9fac-528858a4d634" />                                                                                                                                                                                       |
+| **Chat Add Page**  | 사용자 위치 기준<br>새로운 채팅방 생성           | 주소 확인,<br>제목 입력,<br>등록 버튼                 | <img width="200" height="400" alt="chatadd" src="https://github.com/user-attachments/assets/edb1764c-4dea-4019-8ee0-890117810855" />                                                                                                                                                                                    |
+
+
+<br>
+
 ## ⚙️ 핵심 기능
-### 🕵️‍♂️ 익명성 보장
 - 이름, 나이, 연락처 없이 닉네임만으로 채팅 참여 가능
 - 개인정보 노출 최소화 → 자유로운 소통 환경 제공
-
-### 🗺️ 위치 기반 채팅방 (생성 & 참여)
 - 사용자의 현재 위치(예: "역삼동")를 기준으로 자동 생성된 채팅방에 참여하거나 직접 개설 가능
 - 특정 장소 기반 이벤트/소모임 형성 용이  
 <br>
 
-## ✅ 완료한 필수 기능
-### 1. HomePage
-- AppBar의 title 속성에 TextField 위젯 배치
-- onSubmitted 콜백을 통해 검색어 입력 시 지역 검색 수행
-- 검색 결과는 ListView로 출력
-- 각 아이템에는 title, category, roadAddress가 세로 정렬로 표시
-- 검색 결과 아이템 클릭 시 ReviewPage로 이동
-- Riverpod을 통해 상태관리 구현 완료
-<br>
-
-### 2. 네이버 검색 Open API 연동
-- 네이버 검색 API 키 발급 후 요청 테스트 완료
-- dio 패키지를 사용해 비동기 HTTP GET 요청 구현  
-- 응답 데이터를 바탕으로 Location 모델 클래스 생성
-- LocationRepository 클래스 생성 후 검색 메서드 구현
-- flutter_riverpod으로 ViewModel 구성
-- HomePage에서 ViewModel과 연결하여 검색 기능 실행
-<br>
-
-### 3. Firestore를 이용한 리뷰 저장 및 조회 기능
-- 검색 결과 클릭 시 ReviewPage로 이동하여 해당 지역의 리뷰 확인 가능
-- mapX, mapY 좌표 기준으로 리뷰 필터링
-- 리뷰 작성 후 Firestore에 저장 및 실시간 반영
-- Firebase 콘솔에서 프로젝트 생성 및 Firestore 활성화
-<br>
-
-
 ## 🛠 Technologies & 💻 Development Tools
-- Flutter – 크로스 플랫폼 앱 개발 프레임워크
-- Dart – Flutter 앱 개발 언어
+- Flutter 3.32.7
+- Dart 3.8.1
 - Riverpod - 상태 관리 라이브러리  
 - Firebase - 백엔드 서비스 연동  
 - uuid – 사용자 고유 ID 및 데이터 식별자 생성
@@ -144,6 +128,14 @@ https://www.youtube.com/watch?v=h_aDIZ1Qcy4
 - GitHub – 형상 관리 및 협업
 <br>
 
+## 🤝 커밋 컨벤션
+- ✨ : 새로운 기능 추가
+- 🐛  : 버그 수정
+- 📝 : 문서 관련 변경 (예: README, 주석 등)
+- 🎨 : UI/스타일 수정
+- ♻️ : 기능 변경 없이 코드 구조만 개선
+- 🎉 : 프로젝트 시작
+<br>
 
 ## 🔥 Trouble Shooting
 ### 1. 💬 채팅이 길어지면 프로필 위치가 아래로 내려가는 현상
