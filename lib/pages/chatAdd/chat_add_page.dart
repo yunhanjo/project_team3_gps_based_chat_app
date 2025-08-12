@@ -1,38 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:project_team3_gps_based_chat_app/common/models/chat_room_info.dart';
-import 'package:project_team3_gps_based_chat_app/pages/chat/chat_page.dart';
-import 'package:project_team3_gps_based_chat_app/pages/chatList/chat_list_page.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chatAdd/viewmodel/chat_add_view_model.dart';
-
-ChatRoomInfo aa = ChatRoomInfo(
-  chatID: 'aa1234',
-  name: '조민우',
-  address: '상암동',
-  chatNM: '초보 등산',
-  category: '운동',
-  descript: '등산할 사람~',
-  hostkey: 'aaa',
-);
+import 'package:project_team3_gps_based_chat_app/common/color.dart';
+import 'package:project_team3_gps_based_chat_app/common/repository/user_repo.dart';
+import 'package:project_team3_gps_based_chat_app/common/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatAddPage extends StatefulWidget {
+  String name;
+  String address;
+  String chatID;
+  String hostkey;
+  ChatAddPage({
+    required this.address,
+    required this.name,
+    required this.chatID,
+    required this.hostkey,
+  });
   @override
   _ChatAddPageState createState() => _ChatAddPageState();
 }
 
 class _ChatAddPageState extends State<ChatAddPage> {
   late ChatAddViewModel viewModel;
-
+  String userName = "Loading...";
+  String userAddress = "Loading...";
+  final UserRepo userRepo = UserRepo();
+  late DateTime currentDateTime;
   @override
   void initState() {
     super.initState();
     viewModel = ChatAddViewModel();
+    currentDateTime = DateTime.now(); // 현재 시간 설정
+    _loadUserInfo();
   }
 
   @override
   void dispose() {
     viewModel.disposeControllers();
     super.dispose();
+  }
+
+  void _loadUserInfo() async {
+    User? user = await userRepo.readUser(userID: widget.hostkey);
+    if (user != null) {
+      setState(() {
+        userName = user.userNM;
+        userAddress = user.address;
+      });
+    } else {
+      setState(() {
+        userName = "윤한조";
+        userAddress = "강남동";
+      });
+    }
   }
 
   void _goToListPage() async {
@@ -44,24 +65,20 @@ class _ChatAddPageState extends State<ChatAddPage> {
       ).showSnackBar(SnackBar(content: Text('모든 항목을 입력해주세요.')));
       return;
     }
-
     try {
-      await viewModel.saveChatData('삼성동'); // 저장
-      final data = viewModel.getChatData('삼성동');
-      // Navigator.pop(context, data);
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) {
-            return ChatPage(
-              chatID: aa.chatID,
-              name: aa.name,
-              chatNM: aa.chatNM,
-              address: aa.address,
-            );
-          },
-        ),
-      ); // 저장 후 pop으로 데이터 전달
+      // Firestore에 데이터 저장
+      await _saveChatDataToFirestore();
+      // 저장 후 리스트 페이지로 데이터 넘기기
+      final data = {
+        'address': userAddress,
+        'category': viewModel.selectedCategory,
+        'name': viewModel.chatNMController.text,
+        'description': viewModel.descriptController.text,
+        'createdAt': currentDateTime,
+        'chatID': widget.chatID,
+        'hostkey': widget.hostkey,
+      };
+      Navigator.pop(context, data); // 리스트 페이지로 데이터 넘기기
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('저장 중 오류가 발생했습니다. 다시 시도해주세요.')),
@@ -69,20 +86,45 @@ class _ChatAddPageState extends State<ChatAddPage> {
     }
   }
 
+  Future<void> _saveChatDataToFirestore() async {
+    final chatCollectionRef = FirebaseFirestore.instance
+        .collection('ChatRoomInfo');
+    // Firestore 문서 ID를 chatID로 설정하기 위해 새로운 문서 추가
+    final docRef = chatCollectionRef
+        .doc(); // 새로운 문서 생성 (자동으로 생성된 ID 사용)
+    final chatID = docRef.id; // 생성된 문서의 ID를 chatID로 사용
+    await docRef.set({
+      'chatID': chatID, // chatID는 문서의 ID로 사용
+      'address': widget.address, // 예시로 '상암동' 사용 (실제 주소로 변경 가능)
+      'category': viewModel.selectedCategory, // 선택된 카테고리
+      'chatNM': viewModel.chatNMController.text, // 스파크 이름
+      'createdAt': Timestamp.fromDate(
+        currentDateTime,
+      ), // Timestamp로 변환
+      'descript': viewModel.descriptController.text, // 스파크 소개
+      'hostkey': widget.hostkey, // 실제 로그인된 사용자 ID로 변경 필요
+      'name': userName, // 사용자 이름 (이미 불러온 이름)
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        centerTitle: false,
+        backgroundColor: AppColor.yellowBoxColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.only(
+            bottomRight: Radius.circular(80),
+          ),
+        ),
         title: Text('스파크 만들기'),
-        backgroundColor: Color(0xFFFFEB86),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Center(
             child: Column(
-              //mainAxisAlignment: MainAxisAlignment.center,
-              //crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Padding(
                   padding: const EdgeInsets.all(40.0),
@@ -96,23 +138,14 @@ class _ChatAddPageState extends State<ChatAddPage> {
                         width: 3, // 테두리 두께
                       ),
                       borderRadius: BorderRadius.circular(50),
-                      // boxShadow: [
-                      //   BoxShadow(
-                      //     color: Colors.black.withAlpha(15), // 약한 회색
-                      //     offset: Offset(0, 5), // 아래 방향 그림자
-                      //     blurRadius: 3, // 부드러움
-                      //     spreadRadius: 0, // 퍼짐 없음
-                      //   ),
-                      // ],
                     ),
                     child: Text.rich(
-                      //부분 텍스트 스타일 적용
                       TextSpan(
-                        text: '현재 000님의 위치\n',
-                        style: TextStyle(fontSize: 16), // 기본 스타일
+                        text: '현재 $userName님의 위치\n',
+                        style: TextStyle(fontSize: 16),
                         children: [
                           TextSpan(
-                            text: '⚡삼성동⚡',
+                            text: '⚡$userAddress⚡',
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -124,7 +157,6 @@ class _ChatAddPageState extends State<ChatAddPage> {
                     ),
                   ),
                 ),
-
                 DropdownButton<String>(
                   value: viewModel.selectedCategory,
                   items: viewModel.categories.map((category) {
@@ -141,7 +173,6 @@ class _ChatAddPageState extends State<ChatAddPage> {
                     }
                   },
                 ),
-
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 50,
@@ -155,7 +186,6 @@ class _ChatAddPageState extends State<ChatAddPage> {
                     ),
                   ),
                 ),
-
                 Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 50,
@@ -169,23 +199,18 @@ class _ChatAddPageState extends State<ChatAddPage> {
                     ),
                   ),
                 ),
-
                 SizedBox(
                   width: 300,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: _goToListPage,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(
-                        0xFFFFEB86,
-                      ), // 버튼 배경색
-                      foregroundColor: Colors.black, // 텍스트 색
+                      backgroundColor: Color(0xFFFFEB86),
+                      foregroundColor: Colors.black,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          10,
-                        ), // 모서리 둥글게
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      elevation: 3, // 그림자 깊이
+                      elevation: 3,
                       textStyle: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
@@ -203,7 +228,7 @@ class _ChatAddPageState extends State<ChatAddPage> {
                           TextSpan(
                             text: ' Spark',
                             style: GoogleFonts.playpenSans(
-                              fontSize: 20,
+                              fontSize: 18,
                             ),
                           ),
                           TextSpan(
@@ -216,8 +241,6 @@ class _ChatAddPageState extends State<ChatAddPage> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-
-                    //⚡
                   ),
                 ),
               ],

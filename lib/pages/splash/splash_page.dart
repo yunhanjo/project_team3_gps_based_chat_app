@@ -23,14 +23,20 @@ class _SplashPageState extends State<SplashPage> {
       if (user == null) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => WelcomePage(id: id)),
+          MaterialPageRoute(
+            builder: (context) => WelcomePage(id: id),
+          ),
         );
       } else {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
             builder: (context) {
-              return ChatListPage(data: {});
+              return ChatListPage(
+                address: user.address,
+                name: user.userNM,
+                userID: user.userID,
+              );
             },
           ),
         );
@@ -40,6 +46,8 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Image.asset('assets/icons/logo.png')));
+    return Scaffold(
+      body: Center(child: Image.asset('assets/icons/logo.png')),
+    );
   }
 }
