@@ -7,13 +7,12 @@ class ChatListViewModel {
     required String address,
     required String filter,
     String? category,
-    }) 
-  {
+  }) {
     Query query = FirebaseFirestore.instance.collection('ChatRoomInfo');
 
     // 주소 필터
     query = query.where('address', isEqualTo: address);
-    
+
     final now = DateTime.now();
     DateTime start, end;
 
@@ -23,24 +22,37 @@ class ChatListViewModel {
         start = DateTime(now.year, now.month, now.day);
         end = start.add(Duration(days: 1));
         query = query
-            .where('createdAt', isGreaterThanOrEqualTo: Timestamp.fromDate(start))
+            .where(
+              'createdAt',
+              isGreaterThanOrEqualTo: Timestamp.fromDate(start),
+            )
             .where('createdAt', isLessThan: Timestamp.fromDate(end));
         break;
 
-      case 'tomorrow':
-        start = DateTime(now.year, now.month, now.day).add(Duration(days: 1));
+      case 'yesterday':
+        start = DateTime(now.year, now.month, now.day).add(Duration(days: -1));
         end = start.add(Duration(days: 1));
         query = query
-            .where('createdAt', isGreaterThanOrEqualTo: Timestamp.fromDate(start))
+            .where(
+              'createdAt',
+              isGreaterThanOrEqualTo: Timestamp.fromDate(start),
+            )
             .where('createdAt', isLessThan: Timestamp.fromDate(end));
         break;
 
       case 'week':
         final weekday = now.weekday;
-        start = DateTime(now.year, now.month, now.day).subtract(Duration(days: weekday - 1));
+        start = DateTime(
+          now.year,
+          now.month,
+          now.day,
+        ).subtract(Duration(days: weekday - 1));
         end = start.add(Duration(days: 7));
         query = query
-            .where('createdAt', isGreaterThanOrEqualTo: Timestamp.fromDate(start))
+            .where(
+              'createdAt',
+              isGreaterThanOrEqualTo: Timestamp.fromDate(start),
+            )
             .where('createdAt', isLessThan: Timestamp.fromDate(end));
         break;
 
@@ -61,19 +73,18 @@ class ChatListViewModel {
 
     // 결과를 ChatRoomInfo 리스트로 변환
     return query.snapshots().map((snapshot) {
-        print('문서 ~수: ${snapshot.docs.length}');
-        for (var doc in snapshot.docs) {
-          print('문서ID: ${doc.id}, 데이터: ${doc.data()}');
+      //print('문서 ~수: ${snapshot.docs.length}');
+      for (var doc in snapshot.docs) {
+        //print('문서ID: ${doc.id}, 데이터: ${doc.data()}');
+      }
+      return snapshot.docs.map((doc) {
+        final data = doc.data() as Map<String, dynamic>;
+        // createdAt이 null인 경우 방어 처리
+        if (!data.containsKey('createdAt') || data['createdAt'] == null) {
+          data['createdAt'] = Timestamp.fromDate(DateTime(2000)); // 기본값
         }
-      return snapshot.docs
-        .map((doc) {
-          final data = doc.data() as Map<String, dynamic>;
-          // createdAt이 null인 경우 방어 처리
-          if (!data.containsKey('createdAt') || data['createdAt'] == null) {
-            data['createdAt'] = Timestamp.fromDate(DateTime(2000)); // 기본값
-          }
-          return ChatRoomInfo.fromJson(data, doc.id);
-        }).toList();
+        return ChatRoomInfo.fromJson(data, doc.id);
+      }).toList();
     });
   }
 }

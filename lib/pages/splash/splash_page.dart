@@ -5,6 +5,8 @@ import 'package:project_team3_gps_based_chat_app/common/models/uuid_create.dart'
 import 'package:project_team3_gps_based_chat_app/pages/welcome/welcome_page.dart';
 
 class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
+
   @override
   State<SplashPage> createState() => _SplashPageState();
 }
@@ -23,9 +25,7 @@ class _SplashPageState extends State<SplashPage> {
       if (user == null) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-            builder: (context) => WelcomePage(id: id),
-          ),
+          MaterialPageRoute(builder: (context) => WelcomePage(id: id)),
         );
       } else {
         Navigator.pushReplacement(
@@ -46,8 +46,6 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(child: Image.asset('assets/icons/logo.png')),
-    );
+    return Scaffold(body: Center(child: Image.asset('assets/icons/logo.png')));
   }
 }

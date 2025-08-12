@@ -6,7 +6,7 @@ import 'package:project_team3_gps_based_chat_app/common/models/chat_content.dart
 /// 내 채팅 박스
 class myContent extends StatelessWidget {
   ChatContent content;
-  myContent({required this.content});
+  myContent({super.key, required this.content});
 
   @override
   Widget build(BuildContext context) {
@@ -19,22 +19,13 @@ class myContent extends StatelessWidget {
         // 시간
         Text(
           time,
-          style: TextStyle(
-            color: AppColor.greyTextColor,
-            fontSize: 12,
-          ),
+          style: TextStyle(color: AppColor.greyTextColor, fontSize: 12),
         ),
         SizedBox(width: 5),
         // 말풍선
         Container(
-          padding: EdgeInsets.symmetric(
-            vertical: 6,
-            horizontal: 8,
-          ),
-          constraints: BoxConstraints(
-            minHeight: 35,
-            maxWidth: 200,
-          ),
+          padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          constraints: BoxConstraints(minHeight: 35, maxWidth: 200),
           decoration: BoxDecoration(
             color: AppColor.myContentBoxColor,
             borderRadius: BorderRadius.only(

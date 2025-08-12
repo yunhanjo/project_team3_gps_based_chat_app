@@ -22,7 +22,7 @@ class GeolocatorHelper {
         distanceFilter: 100,
       ),
     );
-    print(currentPosition);
+    //print(currentPosition);
     return currentPosition;
   }
 }

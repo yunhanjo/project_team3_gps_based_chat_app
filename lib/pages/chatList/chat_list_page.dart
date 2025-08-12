@@ -49,7 +49,7 @@ class _ChatListPageState extends State<ChatListPage> {
     final snapshot = await FirebaseFirestore.instance
         .collection('ChatRoomInfo')
         .get();
-    print('불러온 문서 수: ${snapshot.docs.length}');
+    //print('불러온 문서 수: ${snapshot.docs.length}');
 
     final loaded = <String>{}; // Set을 사용하여 중복 제거
 
@@ -82,10 +82,7 @@ class _ChatListPageState extends State<ChatListPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: _location(),
-          ),
+          Padding(padding: const EdgeInsets.all(16), child: _location()),
           _buildFilterButtons(),
           if (filter == 'category') _buildCategoryDropdown(),
           Expanded(child: _buildChatRoomCards()),
@@ -100,15 +97,9 @@ class _ChatListPageState extends State<ChatListPage> {
     return Row(
       mainAxisSize: MainAxisSize.min, // 내용만큼만 공간 차지
       children: [
-        Icon(
-          Icons.location_on_outlined,
-          color: AppColor.blackOutline,
-        ),
+        Icon(Icons.location_on_outlined, color: AppColor.blackOutline),
         SizedBox(width: 4), // 아이콘과 텍스트 사이 간격
-        Text(
-          '${widget.address} 주변',
-          style: TextStyle(fontSize: 16),
-        ),
+        Text('${widget.address} 주변', style: TextStyle(fontSize: 16)),
       ],
     );
   }
@@ -118,7 +109,7 @@ class _ChatListPageState extends State<ChatListPage> {
     final filters = {
       '전체': 'all',
       '오늘': 'today',
-      '내일': 'tomorrow',
+      '어제': 'yesterday',
       '이번 주': 'week',
       '카테고리': 'category',
     };
@@ -161,9 +152,7 @@ class _ChatListPageState extends State<ChatListPage> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: DropdownButton<String>(
-        value: selectedCategory.isEmpty
-            ? null
-            : selectedCategory,
+        value: selectedCategory.isEmpty ? null : selectedCategory,
         hint: Text('카테고리를 선택하세요'),
         isExpanded: true,
         items: category.map((cat) {
@@ -187,15 +176,12 @@ class _ChatListPageState extends State<ChatListPage> {
         category: selectedCategory,
       ),
       builder: (context, snapshot) {
-        if (snapshot.connectionState ==
-            ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(child: CircularProgressIndicator());
         }
 
         if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(
-            child: Text('주변에 Spark 모임이 없습니다. \n 새 모임을 열어 주세요'),
-          );
+          return Center(child: Text('주변에 Spark 모임이 없습니다. \n 새 모임을 열어 주세요'));
         }
 
         final rooms = snapshot.data!;
@@ -206,15 +192,10 @@ class _ChatListPageState extends State<ChatListPage> {
             final room = rooms[index];
             return Card(
               shape: RoundedRectangleBorder(
-                side: BorderSide(
-                  color: Colors.grey.shade300,
-                ), // 회색 아웃라인
+                side: BorderSide(color: Colors.grey.shade300), // 회색 아웃라인
                 borderRadius: BorderRadius.circular(8),
               ),
-              margin: EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 8,
-              ),
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               child: Padding(
                 padding: EdgeInsets.all(16),
                 child: Row(
@@ -223,8 +204,7 @@ class _ChatListPageState extends State<ChatListPage> {
                     // 왼쪽: 텍스트 정보
                     Expanded(
                       child: Column(
-                        crossAxisAlignment:
-                            CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             room.chatNM, //채팅방 명
@@ -239,22 +219,17 @@ class _ChatListPageState extends State<ChatListPage> {
                                     20 //상세내용이 길면 20자 까지만 출력하고 '...'으로 줄임
                                 ? '${room.descript.substring(0, 20)}...'
                                 : room.descript,
-                            style: TextStyle(
-                              color: Colors.grey[600],
-                            ),
+                            style: TextStyle(color: Colors.grey[600]),
                           ),
                           SizedBox(height: 8),
-                          Text(
-                            room.category,
-                            style: TextStyle(fontSize: 14),
-                          ),
+                          Text(room.category, style: TextStyle(fontSize: 14)),
                         ],
                       ),
                     ),
                     // 오른쪽: 참여하기 버튼
                     ElevatedButton(
                       onPressed: () {
-                        print('참여하기 클릭됨');
+                        //print('참여하기 클릭됨');
                         //채팅 참여하기 버튼 이동하는 네비게이터(파라미터 값 추가해서 전달)
                         Navigator.push(
                           context,
@@ -268,15 +243,14 @@ class _ChatListPageState extends State<ChatListPage> {
                           ),
                         );
                       },
-                      child: Text('Spark ⚡'),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                          borderRadius:
-                              BorderRadiusGeometry.circular(16),
+                          borderRadius: BorderRadiusGeometry.circular(16),
                         ),
                         padding: EdgeInsets.all(12),
                         textStyle: TextStyle(fontSize: 14),
                       ),
+                      child: Text('Spark ⚡'),
                     ),
                   ],
                 ),
@@ -297,11 +271,7 @@ class _ChatListPageState extends State<ChatListPage> {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Icon(
-            Icons.chat_bubble_outline,
-            size: 28,
-            color: Colors.white,
-          ),
+          Icon(Icons.chat_bubble_outline, size: 28, color: Colors.white),
           AnimatedOpacity(
             opacity: _showAddIcon ? 1.0 : 0.0,
             duration: Duration(milliseconds: 300),
@@ -309,15 +279,8 @@ class _ChatListPageState extends State<ChatListPage> {
               scale: _showAddIcon ? 1.0 : 0.0,
               duration: Duration(milliseconds: 300),
               child: Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 4,
-                  right: 4,
-                ),
-                child: Icon(
-                  Icons.add,
-                  size: 16,
-                  color: Colors.white,
-                ),
+                padding: const EdgeInsets.only(bottom: 4, right: 4),
+                child: Icon(Icons.add, size: 16, color: Colors.white),
               ),
             ),
           ),
@@ -328,7 +291,7 @@ class _ChatListPageState extends State<ChatListPage> {
 
   /// 채팅방 추가 다이얼로그
   void _onAddChatRoom() {
-    print('채팅방 만들기 클릭됨');
+    //print('채팅방 만들기 클릭됨');
     // 채팅방 등록 페이지로 이동
     Navigator.push(
       context,

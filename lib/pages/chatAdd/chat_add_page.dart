@@ -12,6 +12,7 @@ class ChatAddPage extends StatefulWidget {
   String chatID;
   String hostkey;
   ChatAddPage({
+    super.key,
     required this.address,
     required this.name,
     required this.chatID,
@@ -80,27 +81,25 @@ class _ChatAddPageState extends State<ChatAddPage> {
       };
       Navigator.pop(context, data); // 리스트 페이지로 데이터 넘기기
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('저장 중 오류가 발생했습니다. 다시 시도해주세요.')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('저장 중 오류가 발생했습니다. 다시 시도해주세요.')));
     }
   }
 
   Future<void> _saveChatDataToFirestore() async {
-    final chatCollectionRef = FirebaseFirestore.instance
-        .collection('ChatRoomInfo');
+    final chatCollectionRef = FirebaseFirestore.instance.collection(
+      'ChatRoomInfo',
+    );
     // Firestore 문서 ID를 chatID로 설정하기 위해 새로운 문서 추가
-    final docRef = chatCollectionRef
-        .doc(); // 새로운 문서 생성 (자동으로 생성된 ID 사용)
+    final docRef = chatCollectionRef.doc(); // 새로운 문서 생성 (자동으로 생성된 ID 사용)
     final chatID = docRef.id; // 생성된 문서의 ID를 chatID로 사용
     await docRef.set({
       'chatID': chatID, // chatID는 문서의 ID로 사용
       'address': widget.address, // 예시로 '상암동' 사용 (실제 주소로 변경 가능)
       'category': viewModel.selectedCategory, // 선택된 카테고리
       'chatNM': viewModel.chatNMController.text, // 스파크 이름
-      'createdAt': Timestamp.fromDate(
-        currentDateTime,
-      ), // Timestamp로 변환
+      'createdAt': Timestamp.fromDate(currentDateTime), // Timestamp로 변환
       'descript': viewModel.descriptController.text, // 스파크 소개
       'hostkey': widget.hostkey, // 실제 로그인된 사용자 ID로 변경 필요
       'name': userName, // 사용자 이름 (이미 불러온 이름)
@@ -174,10 +173,7 @@ class _ChatAddPageState extends State<ChatAddPage> {
                   },
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 50,
-                    vertical: 20,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                   child: TextField(
                     controller: viewModel.chatNMController,
                     decoration: InputDecoration(
@@ -187,10 +183,7 @@ class _ChatAddPageState extends State<ChatAddPage> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 50,
-                    vertical: 20,
-                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
                   child: TextField(
                     controller: viewModel.descriptController,
                     decoration: InputDecoration(
@@ -221,21 +214,15 @@ class _ChatAddPageState extends State<ChatAddPage> {
                         children: [
                           TextSpan(
                             text: '⚡',
-                            style: GoogleFonts.jetBrainsMono(
-                              fontSize: 20,
-                            ),
+                            style: GoogleFonts.jetBrainsMono(fontSize: 20),
                           ),
                           TextSpan(
                             text: ' Spark',
-                            style: GoogleFonts.playpenSans(
-                              fontSize: 18,
-                            ),
+                            style: GoogleFonts.playpenSans(fontSize: 18),
                           ),
                           TextSpan(
                             text: '!',
-                            style: GoogleFonts.jetBrainsMono(
-                              fontSize: 20,
-                            ),
+                            style: GoogleFonts.jetBrainsMono(fontSize: 20),
                           ),
                         ],
                       ),
