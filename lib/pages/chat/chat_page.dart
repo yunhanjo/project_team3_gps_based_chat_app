@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:project_team3_gps_based_chat_app/common/color.dart';
-import 'package:project_team3_gps_based_chat_app/common/models/chat_content.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chat/viewmodel/chat_view_model.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chat/views/bottom_write_box.dart';
 import 'package:project_team3_gps_based_chat_app/pages/chat/views/my_content.dart';
@@ -24,8 +23,7 @@ class ChatPage extends ConsumerStatefulWidget {
 }
 
 class _ChatPageState extends ConsumerState<ChatPage> {
-  TextEditingController textEditingController =
-      TextEditingController();
+  TextEditingController textEditingController = TextEditingController();
   ScrollController scrollController = ScrollController();
 
   // 채팅 입력 시 서버에 저장
@@ -44,26 +42,17 @@ class _ChatPageState extends ConsumerState<ChatPage> {
   @override
   Widget build(BuildContext context) {
     // 채팅 내역 실시간 구독
-    final chatState = ref.watch(
-      chatViewModelProvider(widget.chatID),
-    );
+    final chatState = ref.watch(chatViewModelProvider(widget.chatID));
     // 채팅 입력 시 아래로 스크롤
-    ref.listen<ChatState>(chatViewModelProvider(widget.chatID), (
-      prev,
-      next,
-    ) {
+    ref.listen<ChatState>(chatViewModelProvider(widget.chatID), (prev, next) {
       if (next.contents.length != prev?.contents.length) {
-        WidgetsBinding.instance.addPostFrameCallback((
-          timeStamp,
-        ) {
-          scrollController.jumpTo(
-            scrollController.position.maxScrollExtent,
-          );
-          print('object');
-          print(scrollController.position);
+        WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+          scrollController.jumpTo(scrollController.position.maxScrollExtent);
+          //print('object');
+          //print(scrollController.position);
         });
       }
-      print('asdf');
+      //print('asdf');
     });
     return Scaffold(
       backgroundColor: Colors.white,
@@ -81,11 +70,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
         children: [
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.only(
-                left: 15,
-                right: 15,
-                bottom: 10,
-              ),
+              padding: EdgeInsets.only(left: 15, right: 15, bottom: 10),
               controller: scrollController,
               itemCount: chatState.contents.length,
               itemBuilder: (context, index) {
@@ -95,8 +80,7 @@ class _ChatPageState extends ConsumerState<ChatPage> {
                     : null;
                 return Column(
                   children: [
-                    content.sender != prevContent?.sender &&
-                            index != 0
+                    content.sender != prevContent?.sender && index != 0
                         ? SizedBox(height: 15)
                         : SizedBox(height: 10),
                     widget.name != content.sender

@@ -34,9 +34,9 @@ class ChatAddViewModel extends ChangeNotifier {
 
     try {
       await _firestore.collection('ChatRoomInfo').add(chatData);
-      print('✅ Firestore 저장 성공!');
+      //print('✅ Firestore 저장 성공!');
     } catch (e) {
-      print('❌ Firestore 저장 실패: $e');
+      //print('❌ Firestore 저장 실패: $e');
       rethrow;
     }
   }
