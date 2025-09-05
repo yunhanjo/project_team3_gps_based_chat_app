@@ -38,7 +38,7 @@
 [https://www.figma.com/design/cHLJc3lDYGpLKZ0A4eqj3Y/%EC%A3%BC%ED%8A%B9%EA%B8%B0-%EA%B8%B0%EC%B4%88_3%EC%A1%B0?node-id=0-1](https://www.figma.com/design/9nId9948y9pN9VVlCxoiKV/Flutter-%EC%88%99%EB%A0%A8-3%EC%A1%B0?node-id=0-1&p=f&t=kWcywHbjgo9txEfj-0)
 
 👊 GitHub :  
-[https://github.com/wackyturtle/flutter_pxmarket_app](https://github.com/hyun471/project_team3_gps_based_chat_app)  
+[https://github.com/hyun471/project_team3_gps_based_chat_app]
 
 👊 YouTube :  
 [https://www.youtube.com/watch?v=h_aDIZ1Qcy4](https://www.youtube.com/watch?v=aaIQROUmzg4)  
